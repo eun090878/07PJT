@@ -1,6 +1,9 @@
 package com.model2.mvc.web.product;
 
+import java.io.File;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
@@ -50,7 +54,7 @@ public class ProductController {
 	}
 	
 //	@RequestMapping("/addProduct.do")
-	@RequestMapping( value="addProduct", method=RequestMethod.POST )
+/*	@RequestMapping( value="addProduct", method=RequestMethod.POST )
 	public String addProduct( @ModelAttribute("product") Product product ) throws Exception {
 		
 		System.out.println("/product/addProduct : POST");
@@ -59,6 +63,26 @@ public class ProductController {
 		
 		return "forward:/product/getProduct.jsp";
 	}
+	*/
+//	@RequestMapping("/addProduct.do")
+	@RequestMapping(value="addProduct", method=RequestMethod.POST)
+	   public String addProduct(@ModelAttribute("product") Product product,HttpSession session ) throws Exception{
+	  
+		System.out.println("/product/addProduct:POST");
+
+	      MultipartFile file=product.getFile();
+	      if(file !=null){
+	         String fileName=file.getOriginalFilename();
+	         product.setFileName(fileName);
+	         
+	         File filetemp=new File(session.getServletContext().getRealPath("/")+"images\\uploadFiles\\" + product.getFileName());
+	      }
+	      productService.addProduct(product);
+	      
+	      return "forward:/product/getProduct.jsp";
+	   }
+	
+	
 	
 //	@RequestMapping("/getProduct.do")
 	@RequestMapping( value="getProduct", method=RequestMethod.GET )

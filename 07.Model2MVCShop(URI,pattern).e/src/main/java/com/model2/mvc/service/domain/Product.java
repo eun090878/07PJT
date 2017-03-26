@@ -2,6 +2,8 @@ package com.model2.mvc.service.domain;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 public class Product {
 	
@@ -16,10 +18,20 @@ public class Product {
 	private String menu1;
 	private String menu2;
 	private String menu3;
+	private MultipartFile file;
 	
 	public Product(){
 	}
 	
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 	public String getProTranCode() {
 		return proTranCode;
 	}

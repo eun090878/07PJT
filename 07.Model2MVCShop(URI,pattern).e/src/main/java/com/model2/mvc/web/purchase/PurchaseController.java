@@ -1,5 +1,6 @@
 package com.model2.mvc.web.purchase;
 
+import java.io.FileOutputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
@@ -74,10 +76,12 @@ public class PurchaseController {
 	
 //	@RequestMapping("/addPurchase.do")
 	@RequestMapping( value="addPurchase", method=RequestMethod.POST )
-	public String addPurchase( @RequestParam("prodNo") int prodNo, @RequestParam("buyerId") String buyerId, @ModelAttribute("purchase") Purchase purchase) throws Exception {
+	public String addPurchase( @RequestParam("prodNo") int prodNo, 
+																	@RequestParam("buyerId") String buyerId, 
+																	@ModelAttribute("purchase") Purchase purchase) throws Exception {
 		
 		System.out.println("/addPurchase");
-		
+				
 		User user = userService.getUser(buyerId);
 		Product product = productService.getProduct(prodNo);
 		

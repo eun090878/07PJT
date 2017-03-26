@@ -27,6 +27,10 @@
 		<context:exclude-filter 	type="annotation" 	expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan> 
 	
+	<bean id="multipartResolver" 
+					class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+		
    	
    	<!-- ////////////////////////////////////////// 추가 ,  변경된 부분 ////////////////////////////////////////////////// -->
    	<!-- ■ DefaultAnnotationHandlerMapping 설정 등 기타 Annotation 기반

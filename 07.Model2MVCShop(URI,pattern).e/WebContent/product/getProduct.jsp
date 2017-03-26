@@ -104,7 +104,8 @@
 				<tr>
 					<td height="26">
 						<!-- <img src="/images/uploadFiles/../../images/empty.GIF"/> -->
-						<img src="${product.fileName}"/>
+		<%-- 				<img src="/images/uploadFiles/${product.fileName}"/> --%>
+						<img src = "/images/uploadFiles/${product.fileName}" width="250"/>
 					</td>
 				</tr>
 			</table>
